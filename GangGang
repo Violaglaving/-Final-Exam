@@ -157,9 +157,15 @@ plt.style.use("dark_background")
 ds0 = pd.read_csv("stockprices.csv",sep=" ", header=None )
 ds0.head(5) # check the frist three records
 
+import re
+features = {}
+columns = ['ibm'] 
+keymap = dict(zip(columns,list(features.keys())))
+ds0.columns = columns
+ds0['ibm'].describe()
 
-
-
+%%latex
+The return on day $i$ is $R_i = \frac{P_i-P_{i-1}}{P_{i-1}}$ 
 
 Big Q No.4:
 
