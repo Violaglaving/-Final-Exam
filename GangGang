@@ -57,6 +57,7 @@ print(newRectangle.rectangle_area())
 
 
 Big Q No.3:
+# program for 16.
 import pandas as pd
 import numpy as np
 import sklearn as sl
@@ -72,11 +73,8 @@ plt.style.use("dark_background")
 # plt.style.use("default")
 %config InlineBackend.figure_format = 'svg'  # improve figure quality in jupyter notebook
 
-# read data from file
 ds0 = pd.read_csv("stockprices.csv",sep=" ", header=None )
-
-zui hou yi ti chegg you!!! mei zhang hao!!!!
-
+ds0.head(5) # check the frist three records
 
 
 
