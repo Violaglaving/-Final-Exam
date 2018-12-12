@@ -1,12 +1,14 @@
-multiple choice写选择题的人死了吗？？？？
+
+老谢！！！！就差你了
+multiple choice
 1-5：  
 6-10：
 1.  A   2.  A   3.  A   4.  A 不确定   5.  A
 6.  B   7.  D 不确定   8.  B   9.  D  10. D
 
 
-TianKong 快传！！
-11.1:li0 = [ 10, 20, 10, 30, 42, 5, 8, 20]
+TianKong
+11.1:li0 = [ 10, 20, 10, 30, 42, 5]
 11.2:if item not in lir
 11.3:lir.append(item)
 11.4:print(lir)
@@ -17,8 +19,87 @@ TianKong 快传！！
 12.3:sum = sum + s
 12.4:{average}
 GaiCuo：
+# The "ds" is a data set that stores bank account information
+import pandas as pd # correction!!!
+ds = pd.DataFrame({'id':['zhang', 'li', 'zhou', 'wang'],
+                   'password':['z123', 'l123', 'zh123', 'w123'],
+                   'balance':[5000, 10000, 2000, 300]})
 
-别慌！！做得出来需要时间！！填空题赶紧12题！！！写出来！！
+class ATM:
+    def __init__(self,totalcash, currentid = None):
+        self.cashbalance = totalcash   # The total cash in the ATM
+        self.currentid = currentid  # The id of current user
+
+    def login(self,ds):
+        id = input("Please input your id:")
+        if len(ds[ds['id']==id]['id']) == 1 : # check if your id in the data set
+            n = 0
+            while n <= 3: # only tree trials are allowed
+                pwd = input("Please input your password:")
+                if pwd == ds[ds['id']==id]['password'][0]:
+                    print("You have login successfully")
+                    self.currentid = id
+                    self.choseservice(id) # show menu of operations
+                n = n + 1
+            else:
+                print("Quit after three trials!")
+        else:
+            print("Wrong id and quit!")
+
+    def withdraw(self, amount, ds):
+        currentbalance = ds[ds['id'] == self.currentid]['balance'].values[0]
+        if self.cashbalance < amount :
+            print("Have not enough cash in this ATM!")
+        elif currentbalance < amount:
+            print("The amount exceeds your balance!")
+        else:
+            self.cashbalance = amount
+            currentbalance = ds[ds['id'] == self.currentid]['balance'].values[0]
+            currentbalance -= amount
+            ds.loc[ds['id'] == self.currentid, 'balance'] = currentbalance
+        return currentbalance
+
+    def deposit(self,amount, ds):
+        self.cashbalance += amount
+        currentbalance = ds[ds['id'] == self.currentid]['balance'].values[0]
+        currentbalance += amount
+        ds.loc[ds['id'] == self.currentid,'balance'] = currentbalance
+        return currentbalance
+
+    def checkbalance(self, ds):
+        return ds[ds['id']]['balance'].values[0]
+
+    def choseservice(self, id): # correnction!!! delete ds
+        while True:
+            print(" 1. check your balance\n 2. deposit cash\n 3. withdraw cash\n 4. quit\n")
+            choice = input("Your choice(1/2/3/4):")
+            if choice == '1':     #correction!!!!change int to str!!!!
+                print("--------------------------")
+                print(f"Your balance is: {self.checkbalance(ds)}")
+                print("--------------------------")
+                break
+            elif choice == '2':
+                print("--------------------------")
+                amount = float(input("How much would you like to deposit:"))
+                print(f"Your balance is: {self.deposit(amount,ds)}")
+                print("--------------------------")
+                break
+            elif choice == '3':
+                amount = float(input("How much would you like to withdraw:"))
+                print(f"Your balance is: {self.withdraw(amount,ds)}")
+                break
+            elif choice == '4':
+                print("--------------------------")
+                print("Bye! Do not forget your card!")
+                print("--------------------------")
+                break
+            else:
+                print("Wrong choice!")
+                break
+# Test the ATM class
+atm1 = ATM(20000) # The total cash in the ATM is 20000
+atm1.login(ds)
+
 
 
 
